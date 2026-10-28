@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>Quizcraft | Interactive Quiz Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Quiz topics">
+      <a class="brand" href="/" aria-label="Quizcraft home">
+        <span class="brand-mark" aria-hidden="true">Q<span>.</span></span>
+        <span>quizcraft<span class="brand-dot">.</span></span>
+      </a>
+      <div class="sidebar-intro">
+        <span class="eyebrow">QUESTION LIBRARY</span>
+        <h2>Choose your<br>subject.</h2>
+        <p>Explore a topic, or select Mixed topics for a little of everything.</p>
+      </div>
+      <div class="sidebar-label-row">
+        <span class="sidebar-label">EXPLORE TOPICS</span>
+        <span id="topic-total" class="sidebar-count">--</span>
+      </div>
+      <label class="search-wrap">
+        <span class="search-icon" aria-hidden="true">&#9906;</span>
+        <span class="sr-only">Search topics</span>
+        <input id="topic-search" type="search" placeholder="Find a topic..." autocomplete="off">
+      </label>
+      <nav id="topic-list" class="topic-list" aria-label="Choose a topic"></nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left"><span class="status-dot"></span> INTERACTIVE QUIZ PROJECT <span class="topbar-divider"></span> <span>SELECT / ANSWER / REVIEW</span></div>
+        <div class="topbar-right"><span class="topbar-spark">&#10022;</span> LEARN THROUGH PRACTICE</div>
+      </header>
+
+      <div class="content-wrap">
+        <section id="setup-screen" class="screen">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="pill"><span class="pill-dot"></span> LEARN / PRACTICE / IMPROVE</span>
+              <h1>Test what you know.<br><em>Discover what's next.</em></h1>
+              <p>A focused quiz space for students. Pick a subject, choose your question count, and learn from every answer.</p>
+              <div class="hero-meta">
+                <span><span class="meta-symbol">&#10022;</span> <strong id="hero-questions">--</strong> questions</span>
+                <span class="meta-separator"></span>
+                <span><span class="meta-symbol">&#9671;</span> <strong id="hero-topics">--</strong> topics</span>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orb orb-back"></div>
+              <div class="orb orb-front"><span>?</span></div>
+              <span class="orbit-star star-one">&#10022;</span>
+              <span class="orbit-star star-two">&#10022;</span>
+              <span class="orbit-ring"></span>
+            </div>
+          </div>
+
+          <div class="how-it-works" aria-label="How the quiz works">
+            <div><span class="step-number">01</span><div><strong>Pick a subject</strong><span>Choose from the topic list</span></div></div>
+            <div><span class="step-number">02</span><div><strong>Set your length</strong><span>Answer as many as you like</span></div></div>
+            <div><span class="step-number">03</span><div><strong>Review results</strong><span>See your score and corrections</span></div></div>
+          </div>
+          <div class="section-heading">
+            <div><span class="eyebrow accent">GET STARTED</span><h2>Set up your quiz</h2></div>
+            <span class="section-hint">Select a topic on the left, then set your question count.</span>
+          </div>
+          <div class="setup-grid">
+            <div class="panel topic-panel">
+              <div class="panel-number">YOUR SUBJECT</div>
+              <div class="selected-topic-icon" aria-hidden="true">&#10022;</div>
+              <h3 id="selected-topic">Mixed topics</h3>
+              <p id="selected-description">Questions from every subject in the bank.</p>
+              <div class="selected-topic-footer"><span class="tiny-dot"></span><span id="available-count">Loading questions...</span></div>
+            </div>
+            <div class="panel count-panel">
+              <div class="panel-number">YOUR QUIZ LENGTH</div>
+              <h3>How many questions?</h3>
+              <p>Choose a quick round or practise the whole topic.</p>
+              <div class="count-controls">
+                <button class="count-step" id="decrease-count" type="button" aria-label="One fewer question">-</button>
+                <label class="count-field"><span class="sr-only">Number of questions</span><input id="question-count" type="number" min="1" value="10" inputmode="numeric" aria-describedby="count-error"></label>
+                <button class="count-step" id="increase-count" type="button" aria-label="One more question">+</button>
+                <span class="count-unit">questions</span>
+              </div>
+              <div id="count-error" class="field-error" role="alert" hidden></div>
+              <div class="quick-counts" aria-label="Quick question counts"><span>QUICK PICK</span><div id="quick-count-buttons"></div></div>
+            </div>
+          </div>
+          <div class="start-row">
+            <p><span class="check-icon">&#10003;</span> Questions are shuffled, with no repeats in a round.</p>
+            <button id="start-button" class="button primary-button" type="button" disabled>Start quiz <span aria-hidden="true">&#8594;</span></button>
+          </div>
+        </section>
+
+        <section id="quiz-screen" class="screen quiz-screen" hidden>
+          <div class="quiz-header">
+            <div><span class="eyebrow accent">QUIZ IN PROGRESS</span><h1>One question at a time.</h1></div>
+            <button id="exit-button" class="text-button" type="button">End quiz <span aria-hidden="true">&#8599;</span></button>
+          </div>
+          <div class="quiz-layout">
+            <div class="question-card">
+              <div class="question-meta"><span id="question-category" class="category-badge"></span><div class="question-meta-right"><span id="compact-score"></span><span id="question-counter"></span></div></div>
+              <div class="progress-track" role="progressbar" id="progress-bar" aria-label="Quiz progress" aria-valuemin="0"><span id="progress-fill"></span></div>
+              <span class="question-label">THE QUESTION</span>
+              <h2 id="question-text"></h2>
+              <div id="answer-list" class="answer-list" role="group" aria-label="Answer choices"></div>
+              <div id="feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+              <div class="question-actions"><span id="keyboard-hint">Tip: press A-D or 1-4 to answer</span><button id="next-button" class="button primary-button" type="button" hidden>Next question <span aria-hidden="true">&#8594;</span></button></div>
+            </div>
+            <div class="quiz-side">
+              <div class="side-card"><span class="eyebrow">YOUR PROGRESS</span><div class="side-score"><strong id="live-score">0</strong><span>correct so far</span></div><div class="side-divider"></div><div class="side-stat"><span>Answered</span><strong id="answered-count">0 / 0</strong></div><div class="side-stat"><span>Accuracy</span><strong id="live-accuracy">0%</strong></div></div>
+              <div class="side-note"><span>&#10022;</span><p>Choose an answer to get immediate feedback. Missed questions appear in your review at the end.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="results-screen" class="screen results-screen" hidden>
+          <div class="results-hero">
+            <span class="pill"><span class="pill-dot"></span> SESSION COMPLETE</span>
+            <div class="results-layout">
+              <div><h1 id="result-title" tabindex="-1"></h1><p id="result-subtitle">Your round is complete. Review what you learned below.</p><div class="result-actions"><button id="play-again-button" class="button primary-button" type="button">Try another round <span aria-hidden="true">&#8594;</span></button><button id="change-topic-button" class="button secondary-button" type="button">Choose a topic</button></div></div>
+              <div class="score-ring" id="score-ring"><div><strong id="result-percent">0%</strong><span>YOUR SCORE</span></div></div>
+            </div>
+          </div>
+          <div class="result-stats">
+            <div><span>CORRECT ANSWERS</span><strong id="result-correct">0</strong></div>
+            <div><span>QUESTIONS PLAYED</span><strong id="result-total">0</strong></div>
+            <div><span>TOPIC</span><strong id="result-topic" class="result-topic-name"></strong></div>
+          </div>
+          <div id="review-panel" class="review-panel" hidden><div class="section-heading"><div><span class="eyebrow accent">LEARN FROM YOUR ANSWERS</span><h2>Questions to revisit</h2></div></div><div id="review-list"></div></div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
