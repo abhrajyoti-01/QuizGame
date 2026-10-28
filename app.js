@@ -43,7 +43,7 @@ function makeTopicButton(name, count, index) {
   const icon = document.createElement("span");
   icon.className = "topic-icon";
   icon.setAttribute("aria-hidden", "true");
-  icon.textContent = index === 0 ? "*" : String(index).padStart(2, "0");
+  icon.textContent = String(index).padStart(2, "0");
   const label = document.createElement("span");
   label.className = "topic-name";
   label.textContent = name;

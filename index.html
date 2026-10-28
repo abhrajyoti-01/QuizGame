@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
   <title>Quizcraft | Interactive Quiz Project</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237a5af5'/%3E%3Ctext x='32' y='45' font-family='Arial, sans-serif' font-size='38' font-weight='bold' text-anchor='middle' fill='%23ffffff'%3EQ%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <script src="/app.js" defer></script>
 </head>
@@ -27,9 +28,9 @@
         <span class="sidebar-label">EXPLORE TOPICS</span>
         <span id="topic-total" class="sidebar-count">--</span>
       </div>
-      <label class="search-wrap">
-        <span class="search-icon" aria-hidden="true">&#9906;</span>
-        <span class="sr-only">Search topics</span>
+        <label class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="sr-only">Search topics</span>
         <input id="topic-search" type="search" placeholder="Find a topic..." autocomplete="off">
       </label>
       <nav id="topic-list" class="topic-list" aria-label="Choose a topic"></nav>
@@ -37,29 +38,29 @@
 
     <main class="main-content">
       <header class="topbar">
-        <div class="topbar-left"><span class="status-dot"></span> INTERACTIVE QUIZ PROJECT <span class="topbar-divider"></span> <span>SELECT / ANSWER / REVIEW</span></div>
-        <div class="topbar-right"><span class="topbar-spark">&#10022;</span> LEARN THROUGH PRACTICE</div>
+        <div class="topbar-left"><span class="status-dot"></span> Interactive quiz project</div>
+        <div class="topbar-right">Pick a topic &middot; answer &middot; review</div>
       </header>
 
       <div class="content-wrap">
         <section id="setup-screen" class="screen">
           <div class="hero">
             <div class="hero-copy">
-              <span class="pill"><span class="pill-dot"></span> LEARN / PRACTICE / IMPROVE</span>
               <h1>Test what you know.<br><em>Discover what's next.</em></h1>
               <p>A focused quiz space for students. Pick a subject, choose your question count, and learn from every answer.</p>
               <div class="hero-meta">
-                <span><span class="meta-symbol">&#10022;</span> <strong id="hero-questions">--</strong> questions</span>
+                <span><strong id="hero-questions">--</strong> questions</span>
                 <span class="meta-separator"></span>
-                <span><span class="meta-symbol">&#9671;</span> <strong id="hero-topics">--</strong> topics</span>
+                <span><strong id="hero-topics">--</strong> topics</span>
               </div>
             </div>
             <div class="hero-art" aria-hidden="true">
-              <div class="orb orb-back"></div>
-              <div class="orb orb-front"><span>?</span></div>
-              <span class="orbit-star star-one">&#10022;</span>
-              <span class="orbit-star star-two">&#10022;</span>
-              <span class="orbit-ring"></span>
+              <div class="tile-grid">
+                <span class="tile tile-question">?</span>
+                <span class="tile tile-letter">A</span>
+                <span class="tile tile-letter">B</span>
+                <span class="tile tile-check">&#10003;</span>
+              </div>
             </div>
           </div>
 
@@ -75,7 +76,7 @@
           <div class="setup-grid">
             <div class="panel topic-panel">
               <div class="panel-number">YOUR SUBJECT</div>
-              <div class="selected-topic-icon" aria-hidden="true">&#10022;</div>
+              <div class="selected-topic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13.5 9 5 9-5"/></svg></div>
               <h3 id="selected-topic">Mixed topics</h3>
               <p id="selected-description">Questions from every subject in the bank.</p>
               <div class="selected-topic-footer"><span class="tiny-dot"></span><span id="available-count">Loading questions...</span></div>
@@ -103,7 +104,7 @@
         <section id="quiz-screen" class="screen quiz-screen" hidden>
           <div class="quiz-header">
             <div><span class="eyebrow accent">QUIZ IN PROGRESS</span><h1>One question at a time.</h1></div>
-            <button id="exit-button" class="text-button" type="button">End quiz <span aria-hidden="true">&#8599;</span></button>
+            <button id="exit-button" class="text-button" type="button">End quiz</button>
           </div>
           <div class="quiz-layout">
             <div class="question-card">
@@ -117,7 +118,7 @@
             </div>
             <div class="quiz-side">
               <div class="side-card"><span class="eyebrow">YOUR PROGRESS</span><div class="side-score"><strong id="live-score">0</strong><span>correct so far</span></div><div class="side-divider"></div><div class="side-stat"><span>Answered</span><strong id="answered-count">0 / 0</strong></div><div class="side-stat"><span>Accuracy</span><strong id="live-accuracy">0%</strong></div></div>
-              <div class="side-note"><span>&#10022;</span><p>Choose an answer to get immediate feedback. Missed questions appear in your review at the end.</p></div>
+              <div class="side-note"><span>Tip</span><p>Choose an answer to get immediate feedback. Missed questions appear in your review at the end.</p></div>
             </div>
           </div>
         </section>
